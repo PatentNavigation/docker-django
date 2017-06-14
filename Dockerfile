@@ -2,6 +2,10 @@ FROM ubuntu:16.04
 
 USER root
 
+# Yarn repo
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   build-essential \
@@ -9,6 +13,7 @@ RUN apt-get update && \
   python-virtualenv \
   python-dev \
   python-pip \
+  yarn \
   git-core \
   libffi-dev \
   libxml2-dev \
