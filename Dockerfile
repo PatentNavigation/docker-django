@@ -43,6 +43,7 @@ RUN pip install tox unittest-xml-reporting tblib
 RUN gem install fpm
 
 ADD sql_mode.cnf /etc/mysql/conf.d/sql_mode.cnf
+RUN /usr/sbin/rsyslogd
 
 RUN useradd -ms /bin/bash djuser
 RUN echo "djuser:djuser" | chpasswd
