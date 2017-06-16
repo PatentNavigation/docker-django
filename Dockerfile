@@ -3,28 +3,34 @@ FROM ubuntu:16.04
 USER root
 
 RUN apt-get update && apt-get install -y \
+  # core setup/debug packages (not needed for running app)
+  openssh-client \
   apt-transport-https \
   sudo \
   curl \
   vim \
-  openssh-client \
-  git-core \
-  build-essential \
+  # base python/pip/virtualenv packages
   python-setuptools \
+  build-essential \
+  python-pip \
   python-virtualenv \
   python-dev \
-  python-pip \
-  ruby-full \
-  rsyslog \
-  libssl-dev \
-  ghostscript \
-  pdftk \
+  git-core \
   libffi-dev \
   libxml2-dev \
   libxslt1-dev \
+  # DB-related packages
   python-mysqldb \
   mysql-client \
-  libmysqlclient-dev
+  libmysqlclient-dev \
+  # farnsworth-specific packages
+  libssl-dev \
+  ghostscript \
+  pdftk \
+  # packages needed for testing
+  imagemagick \
+  # packages needed for building deb installer
+  ruby-full
 
 # Node 6 repo
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
@@ -41,9 +47,6 @@ RUN pip install --upgrade pip
 RUN pip install tox unittest-xml-reporting tblib
 
 RUN gem install fpm
-
-ADD sql_mode.cnf /etc/mysql/conf.d/sql_mode.cnf
-RUN /usr/sbin/rsyslogd
 
 RUN useradd -ms /bin/bash djuser
 RUN echo "djuser:djuser" | chpasswd
