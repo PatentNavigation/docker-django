@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
   pdftk \
   # packages needed for testing
   imagemagick \
-  # packages needed for building deb installer
+  # packages needed for building/publishing deb installer
   ruby-full
 
 # Node 6 repo
@@ -44,7 +44,8 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install --upgrade pip
 RUN pip3 install tox unittest-xml-reporting tblib pipenv
 
-RUN gem install fpm
+# build/publish deb installer
+RUN gem install fpm deb-s3
 
 RUN useradd -ms /bin/bash djuser
 RUN echo "djuser:djuser" | chpasswd
