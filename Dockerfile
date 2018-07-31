@@ -10,17 +10,15 @@ RUN apt-get update && apt-get install -y \
   curl \
   vim \
   # base python/pip/virtualenv packages
-  python-setuptools \
+  python3-setuptools \
   build-essential \
-  python-pip \
-  python-virtualenv \
-  python-dev \
+  python3-pip \
+  python3-dev \
   git-core \
   libffi-dev \
   libxml2-dev \
   libxslt1-dev \
   # DB-related packages
-  python-mysqldb \
   mysql-client \
   libmysqlclient-dev \
   # farnsworth-specific packages
@@ -43,8 +41,8 @@ RUN apt-get update && apt-get install -y \
   nodejs \
   yarn
 
-RUN pip install --upgrade pip
-RUN pip install tox unittest-xml-reporting tblib
+RUN pip3 install --upgrade pip
+RUN pip3 install tox unittest-xml-reporting tblib pipenv
 
 RUN gem install fpm
 
