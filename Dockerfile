@@ -2,6 +2,10 @@ FROM ubuntu:16.04
 
 USER root
 
+# python3.7 backports repo
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 6A755776
+RUN echo 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main' > /etc/apt/sources.list.d/deadsnakes-ubuntu-ppa-xenial.list
+
 RUN apt-get update && apt-get install -y \
   # core setup/debug packages (not needed for running app)
   openssh-client \
@@ -9,11 +13,9 @@ RUN apt-get update && apt-get install -y \
   sudo \
   curl \
   vim \
-  # base python/pip/virtualenv packages
-  python3-setuptools \
+  # python & packages needed to install pip dependencies
+  python3.7-dev \
   build-essential \
-  python3-pip \
-  python3-dev \
   git-core \
   libffi-dev \
   libxml2-dev \
@@ -41,8 +43,8 @@ RUN apt-get update && apt-get install -y \
   nodejs \
   yarn
 
-RUN pip3 install --upgrade pip
-RUN pip3 install tox unittest-xml-reporting tblib pipenv
+# pipenv
+RUN curl https://raw.githubusercontent.com/kennethreitz/pipenv/master/get-pipenv.py | python3.7
 
 # build/publish deb installer
 RUN gem install fpm deb-s3
