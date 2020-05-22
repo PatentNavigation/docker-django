@@ -25,10 +25,6 @@ RUN apt-get update && apt-get install -y \
   libmysqlclient-dev \
   # farnsworth-specific packages
   libssl-dev \
-  ghostscript \
-  pdftk \
-  # packages needed for testing
-  imagemagick \
   # packages needed for building/publishing deb installer
   ruby-full
 
