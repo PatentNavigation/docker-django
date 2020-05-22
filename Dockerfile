@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
   vim \
   # python & packages needed to install pip dependencies
   python3.7-dev \
+  python3-pip \
   build-essential \
   git-core \
   libffi-dev \
@@ -40,7 +41,7 @@ RUN apt-get update && apt-get install -y \
   yarn
 
 # pipenv
-RUN curl https://raw.githubusercontent.com/kennethreitz/pipenv/master/get-pipenv.py | python3.7
+RUN pip3 install pipenv
 
 # build/publish deb installer
 RUN gem install fpm deb-s3
