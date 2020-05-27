@@ -29,8 +29,8 @@ RUN apt-get update && apt-get install -y \
   # packages needed for building/publishing deb installer
   ruby-full
 
-# Node 6 repo
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+# Node 12 repo
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # Yarn repo
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
